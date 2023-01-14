@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+
+    <link type="text/css" href="{{ url_for('static', filename='css/registration.css')}}" rel="stylesheet" />
+</head>
+<body>
+    <div class="middle_part">
+        <div class="registration">Зарегистрируйтесь</div>
+        <div class="logintext">Email</div>
+        <div class="passtext">Пароль</div>
+        <form method="post">
+            <input class="email" maxlength="30" type="text" placeholder="Введите Email" name="email">
+            <input class="password" maxlength="20" type="password" size="60" placeholder="Пароль" name="password">
+            <div class="small_text">Мы не собираем и не передаём ваши персональные данные. Регистрация необходима для
+                сохранения маршрутов в избранное.</div>
+            <a href="main_page"><button class= "entry_button" name="entry_button">Войти</button></a>
+
+            {% for msg in get_flashed_messages() %}
+            <div class="flash">{{msg}}</div>
+            {% endfor %}
+        </form>
+    </div>
+</body>
+</html>
+

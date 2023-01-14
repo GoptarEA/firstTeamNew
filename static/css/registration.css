@@ -1,0 +1,195 @@
+html, body {
+  background-color:  #1E1E1E;
+  height: 100%;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  overflow: hidden;
+}
+
+.middle_part{
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    left: 30%;
+    top: 10%;
+
+    background: #FFFFFF;
+    border-radius: 16px;
+}
+
+.registration {
+    position: absolute;
+    width: 384px;
+    height: 64px;
+    left: 208px;
+    top: 59px;
+
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 64px;
+    /* identical to box height, or 152% */
+
+    text-align: center;
+
+    color: #000000;
+}
+
+.logintext {
+    position: absolute;
+    width: 287px;
+    height: 41px;
+    left: 100px;
+    top: 173px;
+
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 36px;
+    /* or 150% */
+    color: #535564;
+}
+
+
+.passtext {
+    position: absolute;
+    width: 287px;
+    height: 41px;
+    left: 100px;
+    top: 355px;
+
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 36px;
+    /* or 150% */
+    color: #535564;
+}
+
+.email {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 600px;
+    height: 80px;
+    left: 100px;
+    top: 232px;
+
+    background: #FFFFFF;
+    border: 3px solid #ECEDF1;
+    border-radius: 16px;
+
+    font-size: 30px;
+    padding-left: 30px;
+
+}
+
+.password {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 600px;
+    height: 80px;
+    left: 100px;
+    top: 409px;
+
+    background: #FFFFFF;
+    border: 3px solid #ECEDF1;
+    border-radius: 16px;
+
+    font-size: 30px;
+    padding-left: 30px;
+
+}
+
+.small_text {
+    position: absolute;
+    width: 550px;
+    height: 44px;
+    left: 131px;
+    top: 527px;
+
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    /* or 138% */
+
+
+    color: #535564;
+
+}
+
+.entry_button {
+
+    position: absolute;
+    width: 600px;
+    height: 80px;
+    left: 100px;
+    top: 614px;
+
+
+    background: #3F4192;
+    border-radius: 16px;
+    border: 0px;
+
+
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 42px;
+    /* or 117% */
+
+    text-align: center;
+
+    color: #FFFFFF;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+    transition-timing-function: ease-in-out;
+
+}
+
+
+@keyframes fade {
+ from {
+  opacity: 1;
+  }
+  to {
+   opacity: 0;
+  }
+}
+
+.flash {
+    position: absolute;
+    width: 600px;
+    height: 80px;
+    left: 100px;
+    top: 800px;
+     font-family: 'Arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 42px;
+    /* or 117% */
+
+    text-align: center;
+
+    color: red;
+
+    animation: fade 4s ease forwards;
+}
+
+
+
+
+.entry_button:hover {
+    background: #3F41FF;
+    transition-timing-function: ease-in-out;
+}
