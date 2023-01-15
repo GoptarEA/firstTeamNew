@@ -236,10 +236,11 @@ section {
     background-color: #EBF0F8;
 }
 
-li {
+ul {
     list-style-type: none;
    }
-ul {
+li {
+    padding 0px;
     margin: 43px 158px 50px 158px;
     width: 1124;
     height: 88;
@@ -258,7 +259,7 @@ ul {
     cursor: pointer;
    }
 
-ul:hover {
+li:hover {
     background: #f4f1ff;
     transform: scale(1.1);
     transition: 0.4s;
@@ -345,12 +346,6 @@ ul:hover {
     transition: 0.4s;
     transition-timing-function: ease-in-out;
    }
-
-
-
-
-
-
 
 footer {
     margin: 0 auto;

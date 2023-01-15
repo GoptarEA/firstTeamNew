@@ -37,3 +37,24 @@ function init(){
     }
 }
 let a = navigator.userAgent;
+
+
+document.getElementById('newRoute').onclick = function () {
+    let ul = document.createElement('ul');
+    ul.className = "newpoint";
+    ul.innerHTML = `<form method="post">
+            <input class="email" maxlength="30" type="text" placeholder="Введите Email" name="email">
+            <input class="password" maxlength="20" type="password" size="60" placeholder="Пароль" name="password">
+            <div class="small_text">Мы не собираем и не передаём ваши персональные данные. Регистрация необходима для
+                сохранения маршрутов в избранное.</div>
+            <a href="main_page"><button class= "entry_button" name="entry_button">Войти</button></a>
+        </form>
+
+
+
+
+    `;
+
+    newRoute.after(ul);
+
+}

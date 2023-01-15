@@ -168,22 +168,24 @@ html, body {
 
 .flash {
     position: absolute;
-    width: 600px;
+    width: 500px;
     height: 80px;
-    left: 100px;
-    top: 800px;
+    left: 150px;
+    top: 320px;
      font-family: 'Arial';
     font-style: normal;
     font-weight: 400;
-    font-size: 36px;
+    font-size: 24px;
     line-height: 42px;
     /* or 117% */
 
     text-align: center;
+    color: white;
+    background: #B22222;
 
-    color: red;
-
-    animation: fade 4s ease forwards;
+    animation: fade 2s ease forwards;
+    animation-delay: 2s;
+    border-radius: 16px;
 }
 
 
@@ -192,4 +194,31 @@ html, body {
 .entry_button:hover {
     background: #3F41FF;
     transition-timing-function: ease-in-out;
+}
+
+
+.redcolor {
+    color: red;
+
+    position: absolute;
+    left: 100px;
+    top: 480px;
+    weight: 700px;
+
+}
+
+.yellowcolor {
+    color: yellow;
+    position: absolute;
+    left: 100px;
+    top: 480px;
+    weight: 700px;
+}
+
+.greencolor {
+    color: green;
+    position: absolute;
+    left: 100px;
+    top: 480px;
+    weight: 700px;
 }
