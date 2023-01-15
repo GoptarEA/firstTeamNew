@@ -388,3 +388,62 @@ footer {
 
     color: #FFFFFF;
 }
+
+
+.email {
+    box-sizing: border-box;
+    width: 600px;
+    height: 80px;
+    background: #FFFFFF;
+    border: 3px solid #ECEDF1;
+    border-radius: 16px;
+    font-size: 30px;
+    padding-left: 30px;
+}
+
+.password {
+    box-sizing: border-box;
+    width: 600px;
+    height: 80px;
+    background: #FFFFFF;
+    border: 3px solid #ECEDF1;
+    border-radius: 16px;
+    font-size: 30px;
+    padding-left: 30px;
+}
+
+.small_text {
+    width: 550px;
+    height: 44px;
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: #535564;
+}
+
+.entry_button {
+    width: 600px;
+    height: 80px;
+    background: #3F4192;
+    border-radius: 16px;
+    border: 0px;
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 42px;
+    text-align: center;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+@keyframes show {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.newpoint {
+    animation: 5s show ease;
+}
