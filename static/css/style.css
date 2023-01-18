@@ -269,7 +269,7 @@ li:hover {
    #map {
     margin: auto;
     padding-bottom: 100px;
-    width: 1124px;
+    width: 1300px;
     height: 800px;
     border-radius: 16px;
     overflow: hidden;
@@ -440,5 +440,71 @@ footer {
   to { opacity: 1; }
 }
 .newpoint {
-    animation: 5s show ease;
+    animation: 1.5s show ease;
+    width: 800px;
+    margin: 0 auto;
+    padding-left: 0px;
+}
+
+.pnt1 {
+    box-sizing: border-box;
+    margin-left: auto;
+    width: 600px;
+    height: 80px;
+    background: #FFFFFF;
+    border: 3px solid #ECEDF1;
+    border-radius: 16px;
+    border: 0px;
+    font-size: 30px;
+    padding-left: 30px;
+}
+
+.pnt2 {
+    margin-top: 30px;
+    margin-left: auto;
+    box-sizing: border-box;
+    width: 600px;
+    height: 80px;
+    background: #FFFFFF;
+    border: 3px solid #ECEDF1;
+    border-radius: 16px;
+    border: 0px;
+    font-size: 30px;
+    padding-left: 30px;
+}
+
+.addroutebtn {
+    width: 600px;
+    height: 80px;
+    margin-top: 30px;
+    margin-left: auto;
+    background: #3F4192;
+    border-radius: 16px;
+    border: 0px;
+
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 42px;
+    /* or 117% */
+
+    text-align: center;
+
+    color: #FFFFFF;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+    transition-timing-function: ease-in-out;
+
+}
+
+.addroutebtn:hover {
+    background: #3F41FF;
+    transition-timing-function: ease-in-out;
+}
+
+.addpointbtn {
+    flex-direction: row;
 }

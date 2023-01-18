@@ -5,15 +5,11 @@ function init(){
     var myMap = new ymaps.Map("map", {
     center: [55.831054, 37.629914],
     zoom: 15
+    }, {
+        // Ограничим область карты.
+        restrictMapArea: [[55.843203, 37.608155], [55.821900, 37.654070]]
     });
 
-
-    myMap.geoObjects.add(new ymaps.Placemark([55.828597, 37.633898], {
-            balloonContent: '<strong>серобуромалиновый</strong> цвет'
-        }, {
-            preset: 'islands#dotIcon',
-            iconColor: '#735184'
-        }))
 
 let dict = new Map()
 
@@ -88,7 +84,6 @@ for (let i = 0; i < arr.length; i++) {
     let coords = [parseFloat(elem[0].split(', ')[0]), parseFloat(elem[0].split(', ')[1])]
     dict.set(elem[1], coords);
 }
-//console.log(dict.get('Павильон №49'))
 
 document.getElementById('placesofinterest').onclick = function () {
     for (var [key, value] of dict){
@@ -99,65 +94,143 @@ document.getElementById('placesofinterest').onclick = function () {
             iconColor: '#' + (Math.random().toString(16) + '000000').substring(2,8).toUpperCase()
         }))
     }
-
-
-
 }
 
 
 
 
 
+    let clickcount = 0;
+
+    document.getElementById('newRoute').onclick = function () {
+        if (clickcount < 1) {
+        let ul = document.createElement('ul');
+        ul.className = "newpoint";
+        ul.id = "newpoint";
+        ul.innerHTML = `
+                <input class="pnt1" maxlength="30" type="text" placeholder="Введите пункт 1" name="pnt1" id="pnt1">
+                <input class="pnt2" maxlength="30" type="text" size="60" placeholder="Введите пункт 2" name="pnt2" id="pnt2">
+                <img class="addpointbtn" id="addpointbtn" src="/static/images/add.png">
+                <img class="deletepointbtn" id="deletepointbtn" src="/static/images/delete.png">
+                <button class="addroutebtn" name="addroutebtn" id="addroutebtn">Построить маршрут</button>
+                `;
+
+        newRoute.after(ul);
+        clickcount = clickcount + 1;
+        }
+    let pointcounts = 2;
+
+    document.getElementById('addpointbtn').onclick = function () {
+        if (pointcounts < 6) {
+            pointcounts = pointcounts + 1;
+            let ul = document.createElement('input');
+            ul.className = "pnt2";
+            ul.placeholder = "Введите пункт " + String(pointcounts);
+            ul.type="text";
+            ul.maxlength = "30";
+            ul.id = "pnt" + String(pointcounts);
+            console.log(pointcounts);
+            document.getElementById("pnt" + String(pointcounts - 1)).after(ul);
+            }
+        }
+
+        document.getElementById('deletepointbtn').onclick = function () {
+        if (pointcounts > 2) {
+            document.getElementById("newpoint").removeChild(document.getElementById("pnt" + String(pointcounts)));
+            pointcounts = pointcounts - 1;
+            }
+        }
 
 
 
+        document.getElementById('addroutebtn').onclick = function () {
+
+            coordsarr = [];
+            for (let i = 1; i <= pointcounts; i++){
+                next = document.getElementById("pnt" + String(i)).value;
+                coordsarr.push([dict.get(next)[0], dict.get(next)[1]])
+                console.log(dict.get(next)[0], dict.get(next)[1])
+            }
+            let pnt1 = document.getElementById('pnt1').value;
+            let pnt2 = document.getElementById('pnt2').value;
+            console.log(dict.get(pnt1)[0], dict.get(pnt1)[1])
+        // Задаём точки мультимаршрута.
+        var pointA = [dict.get(pnt1)[0], dict.get(pnt1)[1]],
+            pointB = [dict.get(pnt2)[0], dict.get(pnt2)[1]],
+
+            /**
+             * Создаем мультимаршрут.
+             * @see https://api.yandex.ru/maps/doc/jsapi/2.1/ref/reference/multiRouter.MultiRoute.xml
+             */
+            multiRoute = new ymaps.multiRouter.MultiRoute({
+                referencePoints: coordsarr,
+                params: {
+                    //Тип маршрутизации - пешеходная маршрутизация.
+                    routingMode: 'pedestrian'
+                }
+            }, {
+                // Автоматически устанавливать границы карты так, чтобы маршрут был виден целиком.
+                boundsAutoApply: true
+            });
+        // Добавляем мультимаршрут на карту.
+        myMap.geoObjects.add(multiRoute);
+    }
+        }
 
 
-
-
-    document.getElementById('firstRoute').onclick = function () {
-        //curl 'https://api.routing.yandex.net/v2/route?waypoints=55.734494627139355,37.68191922355621|55.733441295701056,37.59027350593535&apikey=04fcaae6-825a-469a-86fe-eabc5755edd4'
-        myMap.setCenter([55.824193, 37.639714]);
-        myMap.setZoom(17);
-        var myPolyline = new ymaps.Polyline([
-            // Указываем координаты вершин ломаной.
-            [55.822431, 37.641481],
-            [55.822731, 37.642189],
-            [55.824193, 37.639714],
-            [55.825192, 37.638163],
-            [55.826243, 37.637566]
-        ], {
-            // Описываем свойства геообъекта.
-            // Содержимое балуна.
-            balloonContent: "До главного входа"
-        }, {
-            // Задаем опции геообъекта.
-            // Отключаем кнопку закрытия балуна.
-            balloonCloseButton: false,
-            // Цвет линии.
-            strokeColor: "#000000",
-            // Ширина линии.
-            strokeWidth: 4,
-            // Коэффициент прозрачности.
-            strokeOpacity: 0.5
-        });
-        myMap.geoObjects.add(myPolyline)
+    document.getElementById('routeone').onclick = function () {
+        // Задаём точки мультимаршрута.
+        var pointA = [55.824231, 37.638901],
+            pointB = [55.826271, 37.637578],
+            multiRoute = new ymaps.multiRouter.MultiRoute({
+                referencePoints: [
+                    pointA,
+                    pointB
+                ],
+                params: {
+                    routingMode: 'pedestrian'
+                }
+            }, {
+                boundsAutoApply: true
+            });
+        myMap.geoObjects.add(multiRoute);
+    }
+    document.getElementById('routetwo').onclick = function () {
+        // Задаём точки мультимаршрута.
+        var pointA = [55.826271, 37.637578],
+            pointB = [55.830473, 37.630806],
+            multiRoute = new ymaps.multiRouter.MultiRoute({
+                referencePoints: [
+                    pointA,
+                    pointB
+                ],
+                params: {
+                    routingMode: 'pedestrian'
+                }
+            }, {
+                boundsAutoApply: true
+            });
+        myMap.geoObjects.add(multiRoute);
+    }
+    document.getElementById('routethree').onclick = function () {
+        // Задаём точки мультимаршрута.
+        var pointA = [55.826271, 37.637578],
+            pointB = [55.835044, 37.621723],
+            multiRoute = new ymaps.multiRouter.MultiRoute({
+                referencePoints: [
+                    pointA,
+                    pointB
+                ],
+                params: {
+                    routingMode: 'pedestrian'
+                }
+            }, {
+                boundsAutoApply: true
+            });
+        myMap.geoObjects.add(multiRoute);
     }
 }
+
+
+
 let a = navigator.userAgent;
-
-
-document.getElementById('newRoute').onclick = function () {
-    let ul = document.createElement('ul');
-    ul.className = "newpoint";
-    ul.innerHTML = `<form method="post">
-            <input class="email" maxlength="30" type="text" placeholder="Введите Email" name="email">
-            <input class="password" maxlength="20" type="password" size="60" placeholder="Пароль" name="password">
-            <div class="small_text">Мы не собираем и не передаём ваши персональные данные. Регистрация необходима для
-                сохранения маршрутов в избранное.</div>
-            <a href="main_page"><button class= "entry_button" name="entry_button">Войти</button></a>
-        </form>`;
-
-    newRoute.after(ul);
-
-}
