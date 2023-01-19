@@ -11,6 +11,8 @@ function init(){
     });
 
 
+
+
 let dict = new Map()
 
 s = `55.828597, 37.633898 - Павильон №1 Центральный
@@ -85,6 +87,51 @@ for (let i = 0; i < arr.length; i++) {
     dict.set(elem[1], coords);
 }
 
+
+let isopened = false;
+document.getElementById('search').onclick = function () {
+    if (!isopened){
+        let inp = document.createElement('input');
+        inp.className = "searchinput";
+        inp.id = "searchinput";
+        inp.placeholder = "Введите название объекта";
+        search.after(inp);
+
+        let inpbtn = document.createElement('button');
+        inpbtn.className = "searchbutton";
+        inpbtn.id = "searchbutton";
+        inpbtn.innerHTML = "Найти";
+        searchinput.after(inpbtn);
+
+
+        isopened = true;
+
+
+
+        document.getElementById('searchbutton').onclick = function () {
+            next = document.getElementById("searchinput").value;
+
+        }
+    } else {
+    menupoints.removeChild(searchinput);
+    menupoints.removeChild(searchbutton);
+    isopened = false;
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
 document.getElementById('placesofinterest').onclick = function () {
     for (var [key, value] of dict){
          myMap.geoObjects.add(new ymaps.Placemark([value[0], value[1]], {
@@ -117,8 +164,8 @@ document.getElementById('placesofinterest').onclick = function () {
 
         newRoute.after(ul);
         clickcount = clickcount + 1;
-        }
-    let pointcounts = 2;
+
+        let pointcounts = 2;
 
     document.getElementById('addpointbtn').onclick = function () {
         if (pointcounts < 6) {
@@ -175,6 +222,11 @@ document.getElementById('placesofinterest').onclick = function () {
         // Добавляем мультимаршрут на карту.
         myMap.geoObjects.add(multiRoute);
     }
+        } else {
+            menupoints.removeChild(newpoint);
+            clickcount = 0;
+        }
+
         }
 
 

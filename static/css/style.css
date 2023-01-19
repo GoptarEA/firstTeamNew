@@ -508,3 +508,49 @@ footer {
 .addpointbtn {
     flex-direction: row;
 }
+
+.searchinput {
+    border-radius: 16px;
+    margin: auto;
+    margin-left: 100px;
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 42px;
+    width: 600px;
+    height: 50px;
+}
+
+.searchbutton {
+    width: 400px;
+    height: 80px;
+    margin-top: 30px;
+    margin-left: 100px;
+    background: #3F4192;
+    border-radius: 16px;
+    border: 0px;
+
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 42px;
+    /* or 117% */
+
+    text-align: center;
+
+    color: #FFFFFF;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+    transition-timing-function: ease-in-out;
+    flex-direction: row;
+
+}
+
+.searchbutton:hover {
+    background: #3F41FF;
+    transition-timing-function: ease-in-out;
+}
