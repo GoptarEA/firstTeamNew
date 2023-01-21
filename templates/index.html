@@ -12,17 +12,18 @@
     <script src="https://api-maps.yandex.ru/2.1/?apikey=04fcaae6-825a-469a-86fe-eabc5755edd4&lang=ru_RU" type="text/javascript">
     </script>
     <script src="/static/script/script.js" type="text/javascript" defer></script>
+    <script src="/static/script/provider.js" type="text/javascript" defer></script>
 </head>
 <body>
     <header>
         <div class="container">
             <div class="nav">
-                <img class="schoollogo" src="/static/images/schoollogo.png">
+                <img class="schoollogo" src="/static/images/schoollogo.png" alt="логотип школы">
                 {% if checklogin %}
                     <button name="open-register-win" class="emailbutton">{{login}}</button>
                 {% else %}
                 <a href="/registration" class="regbutton">Регистрация</a>
-                <img class="loginimage" src="/static/images/loginimage.jpg">
+                <img class="loginimage" src="/static/images/loginimage.jpg" alt="логин">
                 <a href="/login" class="loginbutton">Войти</a>
                 {% endif %}
             </div>
@@ -36,8 +37,20 @@
                             полезно для своего дальнейшего развития в сфере ИТ.
                         </p>
                     </div>
-                    <img class="mainimage" src="/static/images/mainpage.jpg">
-                    </div>
+                    <img class="mainimage" id="mainimage" src="/static/images/1.jpg" alt="фото">
+<!--                    <img id="imglisting" src="/static/images/imglisting.png" alt="пролистывание">-->
+                    <script>
+                        let k = 2;
+                        document.getElementById("mainimage").onclick = function () {
+                            document.getElementById("mainimage").src = "/static/images/" + String(k % 7 + 1) + ".jpg";
+                            k += 1;
+                        }
+
+
+
+                    </script>
+
+                </div>
                 <button class="registration">Регистрация</button>
                 <button class="login">Войти</button>
             </div>
@@ -48,12 +61,13 @@
         <div class="container2">
             <h1>Выбрать объекты на карте</h1>
             <ul class="menupoints" id="menupoints">
-                <li id="search">Поиск</li>
-                <li id="newRoute">Построить маршрут</li>
-                <li id="placesofinterest">Достопримечательности на карте ВДНХ</li>
-                <li id="routeone">Маршрут 1: Метро ВДНХ - Главный вход ВДНХ</li>
-                <li id="routetwo">Маршрут 2: Главный вход ВДНХ - Каток ВДНХ</li>
-                <li id="routethree">Маршрут 3: Главный вход ВДНХ - Павильон Космос</li>
+                <li id="search"><p class="mainmenubtn">Поиск</p></li>
+                <li id="newRoute"><p class="mainmenubtn">Построить маршрут</p></li>
+                <li id="timeRoute"><p class="mainmenubtn">Маршрут с ограничением времени</p></li>
+                <li id="placesofinterest"><p class="mainmenubtn">Достопримечательности на карте ВДНХ</p></li>
+                <li id="routeone"><p class="mainmenubtn">Маршрут 1: Метро ВДНХ - Главный вход ВДНХ</p></li>
+                <li id="routetwo"><p class="mainmenubtn">Маршрут 2: Главный вход ВДНХ - Каток ВДНХ</p></li>
+                <li id="routethree"><p class="mainmenubtn">Маршрут 3: Главный вход ВДНХ - Павильон Космос</p></li>
             </ul>
             <div id="map"></div>
         </div>

@@ -8,6 +8,7 @@ body {
     background-color: #1E1E1E;
     background: linear-gradient(#424242, #1E1E1E);
     font-family: Roboto;
+    /*cursor: url('/static/images/cursor.cur') default url('/static/images/pointer.cur') pointer;*/
 }
 
 header {
@@ -33,8 +34,11 @@ header {
     margin: 0px 0px 0px 30px;
     width: 80px;
     height: 80px;
-
-
+    transition: 1s;
+}
+.schoollogo:hover {
+    transform: scale(2.0);
+    transition: 1s;
 }
 
 .emailbutton {
@@ -141,6 +145,10 @@ h1 {
     transition-timing-function: ease-in-out;
 }
 
+.imglisting {
+    display: flex;
+}
+
 h2 {
     margin: 33px 94px 0px 47px;
     font-family: 'Roboto';
@@ -195,7 +203,7 @@ p {
     background: #3F4192;
     border-radius: 16px;
     border: 0px;
-    font-family: 'Roboto';
+    font-family: 'Roboto', serif;
     font-style: normal;
     font-weight: 400;
     font-size: 36px;
@@ -238,26 +246,41 @@ section {
 
 ul {
     list-style-type: none;
+    margin: 0px auto;
    }
 li {
-    padding 0px;
-    margin: 43px 158px 50px 158px;
-    width: 1124;
-    height: 88;
+    padding-left: 0px;
+    padding-top: 0px;
+    margin: 43px 158px 50px 130px;
+    width: 1124px;
+    height: 88px;
     background: #FFFFFF;
     box-shadow: -10px 9px 21px rgba(128, 152, 213, 0.074983);
     border-radius: 16px;
-    font-family: 'Roboto';
+    font-family: 'Roboto', serif;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
-    line-height: 64px;
     /* identical to box height, or 320% */
     color: #000000;
     transition: 0.4s;
     transition-timing-function: ease-in-out;
     cursor: pointer;
    }
+
+.mainmenubtn {
+    position: absolute;
+    font-family: 'Roboto', serif;
+    margin-left: 30px;
+    margin-top: 12px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 64px;
+    /*text-align: center;*/
+    /*vertical-align: center;*/
+
+}
 
 li:hover {
     background: #f4f1ff;
@@ -510,28 +533,28 @@ footer {
 }
 
 .searchinput {
+    box-sizing: border-box;
+    margin-left: 200px;
+    width: 550px;
+    height: 80px;
+    background: #FFFFFF;
+    border: 3px solid #ECEDF1;
     border-radius: 16px;
-    margin: auto;
-    margin-left: 100px;
-    font-family: 'Arial';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 36px;
-    line-height: 42px;
-    width: 600px;
-    height: 50px;
+    border: 0px;
+    font-size: 30px;
+    padding-left: 30px;
 }
 
 .searchbutton {
     width: 400px;
     height: 80px;
     margin-top: 30px;
-    margin-left: 100px;
-    background: #3F4192;
+    margin-left: 70px;
+    background-color: #3F4192;
     border-radius: 16px;
     border: 0px;
 
-    font-family: 'Arial';
+    font-family: 'Roboto', serif;
     font-style: normal;
     font-weight: 400;
     font-size: 36px;
@@ -553,4 +576,116 @@ footer {
 .searchbutton:hover {
     background: #3F41FF;
     transition-timing-function: ease-in-out;
+}
+
+.maplink {
+    text-decoration: none;
+    color: white;
+}
+
+.startpointinput {
+    box-sizing: border-box;
+    margin-left: 200px;
+    width: 450px;
+    height: 80px;
+    background: #FFFFFF;
+    border: 3px solid #ECEDF1;
+    border-radius: 16px;
+    border: 0px;
+    font-size: 30px;
+    padding-left: 30px;
+}
+
+.tm {
+    box-sizing: border-box;
+    margin-left: 30px;
+    width: 170px;
+    height: 80px;
+    background: #FFFFFF;
+    border: 3px solid #ECEDF1;
+    border-radius: 16px;
+    border: 0px;
+    font-size: 30px;
+    padding-left: 30px;
+}
+
+.timeRouteBtn {
+    width: 300px;
+    height: 80px;
+    margin-top: 50px;
+    margin-left: 30px;
+    background: #3F4192;
+    border-radius: 16px;
+    border: 0px;
+
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 42px;
+    /* or 117% */
+
+    text-align: center;
+
+    color: #FFFFFF;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+    transition-timing-function: ease-in-out;
+
+}
+
+.timeRouteBtn:hover {
+    background: #3F41FF;
+    transition-timing-function: ease-in-out;
+}
+
+.discText {
+    margin: auto;
+    width: 1124px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 46px;
+    color:#253B61;
+    text-align: center;
+}
+
+.viewbox {
+    overflow: auto;
+    width: 1124px;
+    height: 400px;
+    background-color: #535564;
+    border-radius: 16px;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.viewboxtext {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    padding: 0px;
+    margin-bottom: 5px;
+}
+
+
+.nextroute {
+    width: 900px;
+    height: 200px;
+    background-color: #f6f6f6;
+    border-radius: 16px;
+    margin: auto;
+    margin-top: 30px;
+    padding-top: 5px;
+    transition: 0.2s;
+}
+
+.nextroute:hover {
+    transition: 0.2s;
+    transform: scale(1.1);
+    background-color: #d9d9d9;
+    cursor: pointer;
 }
