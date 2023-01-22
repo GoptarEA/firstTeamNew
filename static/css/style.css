@@ -7,7 +7,7 @@ body {
     margin: 0;
     background-color: #1E1E1E;
     background: linear-gradient(#424242, #1E1E1E);
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
     /*cursor: url('/static/images/cursor.cur') default url('/static/images/pointer.cur') pointer;*/
 }
 
@@ -90,7 +90,6 @@ header {
 .loginbutton:hover {
     text-decoration: underline;
     color: #152136;
-    font-size: 20px;
 }
 
 .loginimage {
