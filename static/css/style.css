@@ -56,7 +56,6 @@ header {
 }
 .emailbutton:hover {
     transition: 0.2s;
-    transform: scale(1.1);
     text-decoration: underline;
     color: #152136;
     background: hsla(253, 100%, 97%, 0);
@@ -76,7 +75,6 @@ header {
 .regbutton:hover {
     text-decoration: underline;
     color: #152136;
-    transform: scale(1.1);
 }
 
 .loginbutton {
