@@ -4,50 +4,46 @@ from flask import (
     request,
     redirect,
     url_for,
-    flash)
+    flash,
+    session)
 
 from flask_sqlalchemy import SQLAlchemy
 
 from werkzeug.security import generate_password_hash
 
-app = Flask(__name__)  #создание веб-приложения
+app = Flask(__name__)  # создание веб-приложения
 
 app.secret_key = 'thisismysecretkey'
-
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 
 db = SQLAlchemy(app)
 
 
-
-
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     login = db.Column(db.String(20), unique=True)
-    password = db.Column(db.String(15), nullable=False)
+    name = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(30), unique=True)
+    password = db.Column(db.String(15), nullable=False)
 
     def __repr__(self):
-        return f"<users {self.id} {self.email} {self.login} {self.password}"
+        return f"<users {self.id} {self.login} {self.name} {self.email} {self.password}"
 
 
 class Routes(db.Model):
     routeid = db.Column(db.Integer, primary_key=True)
     routepoints = db.Column(db.String(500), nullable=False)
-
     userid = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __repr__(self):
         return f"<users {self.routeid} {self.userid} {[point for point in self.routepoints.split()]}"
 
 
-
 @app.route("/")
 @app.route("/profile")
 def index():
     return render_template('index.html', title="Основная страница")
-
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -62,14 +58,31 @@ def login():
 @app.route("/registration", methods=['GET', 'POST'])
 def registration():
     if request.method == 'POST':
-        # Добавление пользователя в базу данных
-        pass
+        if any([True if person.email == request.form.get('email') else False for person in Users.query.all()]):
+            flash(message="Пользователь с такой почтой уже существует", category="message")
+        elif any([True if person.login == request.form.get('login') else False for person in Users.query.all()]):
+            flash(message="Пользователь с таким логином уже существует", category="message")
+        elif len(request.form.get('login')) < 5:
+            flash(message="Длина логина не может быть меньше 5 символов", category="message")
+        elif len(request.form.get('password')) != len(request.form.get('repeatpassword')):
+            flash(message="Введённые пароли не совпадают", category="message")
+        else:
+            try:
+                hash = generate_password_hash(request.form.get('password'))
+                u = Users(email=request.form.get('email'), password=hash, login=request.form.get('email'))
+                db.session.add(u)
+                db.session.flush()
+                db.session.commit()
+            except:
+                db.session.rollback()
+                flash(message="Ошибка базы данных. Попробуйте повторить регистрацию позже.", category="message")
+                return redirect(url_for("registration"))
     return render_template('registration.html')
 
 
 @app.route('/change_password', methods=['GET', 'POST'])
 def change_password():
-    #Страница с восстановлением пароля
+    # Страница с восстановлением пароля
     return render_template('change_password.html')
 
 
@@ -79,6 +92,7 @@ def password_send():
         return redirect(url_for('login'))
     # Страница с сообщением что новый пароль отправлен на почту
     return render_template('password_send.html')
+
 
 @app.route('/delete_account', methods=['GET', 'POST'])
 def delete_account():
@@ -94,9 +108,6 @@ def politics():
 @app.route('/terms')
 def terms():
     return render_template('terms.html')
-
-
-
 
 
 #
@@ -123,7 +134,7 @@ def terms():
 #             if person.email == request.form.get('email'):
 #                 flash(message="Пользователь с таким логином уже существует", category="message")
 #                 checked = False
-#
+# #
 #         if checked:
 #             try:
 #                 hash = generate_password_hash(request.form.get('password'))
@@ -146,7 +157,4 @@ def terms():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)   #запуск веб-сервера
-
-
-
+    app.run(debug=True)  # запуск веб-сервера
