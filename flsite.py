@@ -66,13 +66,19 @@ def registration():
             flash(message="Длина логина не может быть меньше 5 символов", category="message")
         elif len(request.form.get('password')) != len(request.form.get('repeatpassword')):
             flash(message="Введённые пароли не совпадают", category="message")
+        elif not request.form.get('check_policy'):
+            flash(message="Вы не приняли условия согласшения и политику конфиденциальности", category="message")
         else:
             try:
                 hash = generate_password_hash(request.form.get('password'))
-                u = Users(email=request.form.get('email'), password=hash, login=request.form.get('email'))
+                u = Users(login=request.form.get('login'),
+                          name=request.form.get('name'),
+                          email=request.form.get('email'),
+                          password=hash)
                 db.session.add(u)
                 db.session.flush()
                 db.session.commit()
+                return redirect(url_for('login'))
             except:
                 db.session.rollback()
                 flash(message="Ошибка базы данных. Попробуйте повторить регистрацию позже.", category="message")
