@@ -63,17 +63,19 @@ def login():
 def registration():
     if request.method == 'POST':
         # Добавление пользователя в базу данных
-        pass
+        return render_template('registration.html')
 
 
 @app.route('/change_password', methods=['GET', 'POST'])
 def change_password():
     #Страница с восстановлением пароля
-    pass
+    return render_template('change_password.html')
 
 
 @app.route('/password_send', methods=['GET', 'POST'])
 def password_send():
+    if request.method == 'POST':
+        return redirect(url_for('login'))
     # Страница с сообщением что новый пароль отправлен на почту
     return render_template('password_send.html')
 

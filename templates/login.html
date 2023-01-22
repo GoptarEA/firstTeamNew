@@ -15,7 +15,7 @@
         <div class="login_title_block">
             <h1 class="login_title">Вход</h1>
         </div>
-        <form class="login_form">
+        <form method="post" class="login_form">
             <input class="emailpswinput" type="email" placeholder="Логин или email">
             <input class="emailpswinput" type="password" placeholder="Пароль">
             <div class="flash_text">Пользователь с таким email не зарегистрирован. <br>
@@ -24,7 +24,7 @@
             <button type="submit" class="login_btn">Войти</button>
             <button class="change_acc_btn">Сменить аккаунт</button>
             <div class="another_func">
-                <button class="reg_btn">Регистрация</button>
+                <a href="{{url_for('registration')}}"><button type="button" class="reg_btn">Регистрация</button></a>
                 <button class="forgot_psw_btn">Забыли пароль?</button>
             </div>
         </form>
