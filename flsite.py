@@ -63,7 +63,8 @@ def login():
 def registration():
     if request.method == 'POST':
         # Добавление пользователя в базу данных
-        return render_template('registration.html')
+        pass
+    return render_template('registration.html')
 
 
 @app.route('/change_password', methods=['GET', 'POST'])
@@ -85,10 +86,14 @@ def delete_account():
     return render_template('delete_account.html')
 
 
+@app.route('/politics')
+def politics():
+    return render_template('politics.html')
 
 
-
-
+@app.route('/terms')
+def terms():
+    return render_template('terms.html')
 
 
 
