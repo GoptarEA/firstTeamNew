@@ -15,7 +15,7 @@
     <script src="/static/script/provider.js" type="text/javascript" defer></script>
 </head>
 <body>
-    <header>
+    <header id="header">
         <div class="container">
             <div class="nav">
                 <img class="schoollogo" src="/static/images/schoollogo.png" alt="логотип школы">
@@ -28,6 +28,7 @@
                 {% endif %}
             </div>
             {% if g.user %}
+                <script>document.getElementById('header').style.height = "800px"</script>
                 <div class="lk_block">
                     <h1 class="lk_block_title">Личный кабинет</h1>
                     <div class="menu_block">

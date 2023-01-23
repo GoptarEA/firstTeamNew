@@ -856,12 +856,16 @@ html, body {
     font-size: 36px;
 
     text-align: center;
-    color: #500E34;
+    color: #253B61;
     cursor: pointer;
+
+    transition: 0.2s;
 }
 
 .go_btn:hover {
-    background: #b8b6b6;
+    background: #253B61;
+    color: white;
+    transition: 0.2s;
 }
 
 .btn_container {
