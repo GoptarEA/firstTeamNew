@@ -686,3 +686,239 @@ footer {
     background-color: #d9d9d9;
     cursor: pointer;
 }
+
+
+/*Вариантивная часть Личный кабинет*/
+.lk {
+    margin: 0px auto;
+    margin-top: 50px;
+    width: 1440px;
+    height: 891px;
+    background-color:  #EBF0F8;
+}
+.lktext {
+    margin: 0px auto;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 64px;
+
+    text-align: center;
+    color: #253B61;
+}
+
+.lkform {
+    width: 100%;
+    height: 100%;
+    margin: 0px auto;
+}
+.forminput {
+    margin: 30px 420px 0px 420px;
+    width: 600px;
+    height: 80px;
+    border-radius: 16px;
+    border: 3px solid #ECEDF1;
+    text-align: left;
+    padding-left: 30px;
+    /* padding: 12px 0px 8px 31px; */
+
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    color: #535564;
+}
+
+.savechanges {
+    margin: 35px 420px 0px 420px;
+    width: 600px;
+    height: 80px;
+    background-color: #3F4192;
+    border-radius: 16px;
+    border-width: 0px;
+
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    text-align: center;
+    color: white;
+
+    transition: 0.2s;
+    transition-timing-function: ease-in-out;
+
+    cursor: pointer;
+}
+
+.savechanges:hover {
+    background-color: #2b2c64;
+
+    transition: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+.delete {
+    margin: 22px 420px 0px 420px;
+    width: 600px;
+    height: 32px;
+
+    border-width: 0px;
+    background-color:  #EBF0F8;
+
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+
+    color: #7F8087;
+
+    transition: 0.2s;
+    transition-timing-function: ease-in-out;
+
+    cursor: pointer;
+}
+
+.delete:hover {
+    text-decoration: underline;
+    color: #626268;
+
+    transition: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+/*Вариантивная часть верхнее меню*/
+
+::-webkit-scrollbar {
+    width: 0;
+  }
+
+html, body {
+    margin: 0px auto;
+    width: 100%;
+    height: 100%;
+    background-color: #1E1E1E;
+}
+
+.lk_block {
+    width: 1440px;
+    height: 1000px;
+    padding-top: 50px;
+    margin: 0px auto;
+    background-color: #EBF0F8;
+}
+
+.lk_block_title {
+    margin: 0px auto;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 64px;
+
+    text-align: center;
+    color: #253B61;
+
+    clear: both;
+}
+
+.menu_block {
+    margin-top: 50px;
+    padding-top: 50px;
+    background-image: url(/static/images/first.png);
+    width: 1440px;
+    height: 530px;
+    box-sizing: border-box;
+}
+
+.menu_block_title {
+    margin: 0px 848px 0px 104px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 64px;
+
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.go_btn {
+    margin: 21px 1053px 0px 104px;
+    width: 280px;
+    height: 54px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    border: 0px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+
+    text-align: center;
+    color: #500E34;
+    cursor: pointer;
+}
+
+.go_btn:hover {
+    background: #b8b6b6;
+}
+
+.btn_container {
+    width: 100%;
+    height: 300px;
+    margin-top: 40px;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.btn_container:hover {
+    opacity: 1;
+    transition: 0.2s;
+}
+
+.lk_right_btn {
+    display: inline-block;
+    float: right;
+    padding: 0px;
+    width: 61px;
+    height: 61px;
+    background-color: #ffffff00;
+    background-image: url(/static/images/right_arrow.png);
+
+    border: 0px;
+    border-radius: 100px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.lk_left_btn {
+    display: inline-block;
+    float: left;
+    padding: 0px;
+    width: 61px;
+    height: 61px;
+    background-color: #ffffff00;
+    background-image: url(/static/images/left_arrow.png);
+
+    border: 0px;
+    border-radius: 100px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.lk_left_btn:hover {
+    background-image: url(/static/images/hover_left_arrow.png);
+
+    transition: 0.2s;
+}
+
+.lk_right_btn:hover {
+    background-image: url(/static/images/hover_right_arrow.png);
+
+    transition: 0.2s;
+}

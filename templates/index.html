@@ -19,14 +19,39 @@
         <div class="container">
             <div class="nav">
                 <img class="schoollogo" src="/static/images/schoollogo.png" alt="логотип школы">
-                {% if checklogin %}
-                    <button name="open-register-win" class="emailbutton">{{login}}</button>
+                {% if g.user %}
+                    <button name="open-register-win" class="emailbutton">Добро пожаловать, <br>{{g.user.login}}</button>
                 {% else %}
                 <a href="/registration" class="regbutton">Регистрация</a>
                 <img class="loginimage" src="/static/images/loginimage.jpg" alt="логин">
                 <a href="/login" class="loginbutton">Войти</a>
                 {% endif %}
             </div>
+            {% if g.user %}
+                <div class="lk_block">
+                    <h1 class="lk_block_title">Личный кабинет</h1>
+                    <div class="menu_block">
+                        <h1 class="menu_block_title">Мои маршруты</h1>
+                        <form method="post"><button class="go_btn">Перейти</button></form>
+                        <div class="btn_container">
+                            <button class="lk_left_btn"></button>
+                            <button class="lk_right_btn"></button>
+                        </div>
+                    </div>
+                </div>
+<!--                 <div class="lk">-->
+<!--                    <h1 class="lktext">Личный кабинет</h1>-->
+<!--                    <form class="lkform">-->
+<!--                        <input class="forminput" type="text" placeholder="{{g.user.name}}">-->
+<!--                        <input class="forminput" type="text" placeholder="{{g.user.name}}">-->
+<!--                        <input class="forminput" type="email" placeholder="{{g.user.email}}">-->
+<!--                        <input class="forminput" type="password" placeholder="Новый пароль">-->
+<!--                        <input class="forminput" type="password" placeholder="Повторите пароль">-->
+<!--                        <button class="savechanges">Сохранить изменения</button>-->
+<!--                        <button class="delete">Удалить аккаунт</button>-->
+<!--                    </form>-->
+<!--                </div>-->
+            {% else %}
             <div class="first">
                 <h1>Интерактивная карта ВДНХ</h1>
                 <div class="part">
@@ -54,6 +79,7 @@
                 <button class="registration">Регистрация</button>
                 <button class="login">Войти</button>
             </div>
+            {% endif %}
         </div>
     </header>
     <section>

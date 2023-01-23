@@ -1,5 +1,6 @@
 from flask import (
     Flask,
+    g,
     render_template,
     request,
     redirect,
@@ -9,7 +10,7 @@ from flask import (
 
 from flask_sqlalchemy import SQLAlchemy
 
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)  # создание веб-приложения
 
@@ -40,8 +41,15 @@ class Routes(db.Model):
         return f"<users {self.routeid} {self.userid} {[point for point in self.routepoints.split()]}"
 
 
+@app.before_request
+def before_request():
+    if 'user_id' in session:
+        user = [person for person in Users.query.all() if person.id == session['user_id']][0]
+        g.user = user
+
+
 @app.route("/")
-@app.route("/profile")
+@app.route("/index")
 def index():
     return render_template('index.html', title="Основная страница")
 
@@ -49,9 +57,23 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # проверка логика и пароля
-        return redirect(url_for('profile'))
-    flash(message="Invalid username or password.", category="message")
+        session.pop('user_id', None)
+        login = request.form.get('login')
+        password = request.form.get('password')
+
+        user = [person for person in Users.query.all() if person.email == login or person.login == login][0]
+
+        if not user:
+            print('пользователя не существует', user)
+            flash(message="Пользователя с данным логином не существует.", category="message")
+            return redirect(url_for('login'))
+        elif not check_password_hash(user.password, password):
+            print('Пароль неверный')
+            flash(message="Введён неверный пароль.", category="message")
+            return redirect(url_for('login'))
+        else:
+            session['user_id'] = user.id
+            return redirect(url_for('index'))
     return render_template('login.html')
 
 
