@@ -51,7 +51,9 @@ def before_request():
 @app.route("/")
 @app.route("/index")
 def index():
-    return render_template('index.html', title="Основная страница")
+    lk_block_dict = {'lk_block_1': ["Мои маршруты", "Перейти", 2, "menu_block_1", 1],
+                     'lk_block_2': ["История поиска", "Открыть", 1, "menu_block_2", 2]}
+    return render_template('index.html', title="Основная страница", option=lk_block_dict)
 
 
 @app.route('/login', methods=['GET', 'POST'])

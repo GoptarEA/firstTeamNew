@@ -29,17 +29,50 @@
             </div>
             {% if g.user %}
                 <script>document.getElementById('header').style.height = "800px"</script>
-                <div class="lk_block">
-                    <h1 class="lk_block_title">Личный кабинет</h1>
-                    <div class="menu_block">
-                        <h1 class="menu_block_title">Мои маршруты</h1>
-                        <form method="post"><button class="go_btn">Перейти</button></form>
-                        <div class="btn_container">
-                            <button class="lk_left_btn"></button>
-                            <button class="lk_right_btn"></button>
+                {% for key, value in option.items() %}
+                    <div id="{{key}}" class="{{key}}">
+                        <h1 class="lk_block_title">Личный кабинет</h1>
+                        <div class="{{value[3]}}">
+                            <h1 class="menu_block_title">{{value[0]}}</h1>
+                            <form method="post"><button class="go_btn">{{value[1]}}</button></form>
+                            <div class="btn_container">
+                                <button id="lk_left_btn_{{value[4]}}" class="lk_left_btn"></button>
+                                <button id="lk_right_btn_{{value[4]}}" class="lk_right_btn"></button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
+                <script>
+                    document.getElementById('lk_right_btn_1').onclick = function () {
+                        let first = window.getComputedStyle(document.getElementById('lk_block_1')).zIndex;
+                        let second = window.getComputedStyle(document.getElementById('lk_block_2')).zIndex;
+                        console.log(first);
+                        console.log(second);
+                        document.getElementById('lk_block_1').style.zIndex = second;
+                        document.getElementById('lk_block_2').style.zIndex = first;
+                    }
+                     document.getElementById('lk_left_btn_1').onclick = function () {
+                        let first = window.getComputedStyle(document.getElementById('lk_block_1')).zIndex;
+                        let second = window.getComputedStyle(document.getElementById('lk_block_2')).zIndex;
+                        document.getElementById('lk_block_1').style.zIndex = second;
+                        document.getElementById('lk_block_2').style.zIndex = first;
+                    }
+
+                    document.getElementById('lk_right_btn_2').onclick = function () {
+                        let first = window.getComputedStyle(document.getElementById('lk_block_1')).zIndex;
+                        let second = window.getComputedStyle(document.getElementById('lk_block_2')).zIndex;
+                        console.log(first);
+                        console.log(second);
+                        document.getElementById('lk_block_1').style.zIndex = second;
+                        document.getElementById('lk_block_2').style.zIndex = first;
+                    }
+                     document.getElementById('lk_left_btn_2').onclick = function () {
+                        let first = window.getComputedStyle(document.getElementById('lk_block_1')).zIndex;
+                        let second = window.getComputedStyle(document.getElementById('lk_block_2')).zIndex;
+                        document.getElementById('lk_block_1').style.zIndex = second;
+                        document.getElementById('lk_block_2').style.zIndex = first;
+                    }
+                </script>
 <!--                 <div class="lk">-->
 <!--                    <h1 class="lktext">Личный кабинет</h1>-->
 <!--                    <form class="lkform">-->
