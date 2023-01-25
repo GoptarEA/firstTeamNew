@@ -100,10 +100,9 @@ header {
 }
 
 .first {
-        margin: 0px 0px;
-        width: 1440px;
-        background-color: #EBF0F8;
-
+    margin: 0px 0px;
+    width: 1440px;
+    background-color: #EBF0F8;
 }
 
 h1 {
@@ -946,4 +945,20 @@ html, body {
     background-image: url(/static/images/hover_right_arrow.png);
 
     transition: 0.2s;
+}
+
+/*Страница с историей поиска*/
+
+.no_access {
+    margin: 0px auto;
+    width: 1440px;
+    height: 400px;
+    background-color: #EBF0F8;
+}
+
+.access {
+    margin: 0px auto;
+    width: 1440px;
+    height: 700px;
+    background-color: #EBF0F8;
 }

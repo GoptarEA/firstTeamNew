@@ -238,11 +238,14 @@ s = `55.828597, 37.633898 - Павильон №1 Центральный
         ul.className = "newpoint";
         ul.id = "newpoint";
         ul.innerHTML = `
+                <form method="get">
                 <input class="pnt1" maxlength="30" type="text" placeholder="Введите пункт 1" name="pnt1" id="pnt1">
                 <input class="pnt2" maxlength="30" type="text" size="60" placeholder="Введите пункт 2" name="pnt2" id="pnt2">
+                
                 <img class="addpointbtn" id="addpointbtn" src="/static/images/add.png">
                 <img class="deletepointbtn" id="deletepointbtn" src="/static/images/delete.png">
-                <a href="#map"><button class="addroutebtn" name="addroutebtn" id="addroutebtn">Построить маршрут</button></a>
+                <a href="#map"><button class="addroutebtn" name="addroutebtn" id="addroutebtn" type="submit">Построить маршрут</button></a>
+                </form>
                 `;
 
         newRoute.after(ul);
