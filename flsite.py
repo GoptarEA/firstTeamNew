@@ -6,7 +6,8 @@ from flask import (
     redirect,
     url_for,
     flash,
-    session)
+    session,
+    jsonify)
 
 from flask_sqlalchemy import SQLAlchemy
 
@@ -35,10 +36,12 @@ class Users(db.Model):
 class Routes(db.Model):
     routeid = db.Column(db.Integer, primary_key=True)
     routepoints = db.Column(db.String(500), nullable=False)
+    type = db.Column(db.String(10), nullable=False)  # favorites или history
     userid = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __repr__(self):
-        return f"<users {self.routeid} {self.userid} {[point for point in self.routepoints.split()]}"
+        return f"routeid: {self.routeid}\nuserid: " \
+               f"{self.userid}\ntype: {self.type}\n{[point for point in self.routepoints.split(', ')]}"
 
 
 @app.before_request
@@ -48,11 +51,47 @@ def before_request():
         g.user = user
 
 
-@app.route("/")
-@app.route("/index")
+@app.route("/add_to_history")
+def add_to_history():
+    a = request.args.get('pnt1', 0, type=str)
+    b = request.args.get('pnt2', 0, type=str)
+    print(a)
+    print(b)
+    r = Routes(routepoints=a + ', ' + b,
+              type="history",
+              userid=g.user.id)
+    db.session.add(r)
+    db.session.flush()
+    db.session.commit()
+    return jsonify(result=a + b)
+
+
+
+
+@app.route("/test_template")
+def test_template():
+    return render_template('test_template.html')
+
+
+@app.route("/history")
+def history():
+    routes = [routes for routes in Routes.query.all() if g.user.id == routes.userid and routes.type == "history"]
+    print(routes)
+    return render_template('history.html', title="История поиска", option=routes)
+
+
+@app.route("/favorites")
+def favorites():
+    return render_template('favorites.html', title='Мои маршруты')
+
+
+@app.route("/", methods=['GET'])
+@app.route("/index", methods=['GET'])
 def index():
-    lk_block_dict = {'lk_block_1': ["Мои маршруты", "Перейти", 2, "menu_block_1", 1],
-                     'lk_block_2': ["История поиска", "Открыть", 1, "menu_block_2", 2]}
+    lk_block_dict = {'lk_block_1': ["Мои маршруты", "Перейти", 2, "menu_block_1", 1, url_for('favorites')],
+                     'lk_block_2': ["История поиска", "Открыть", 1, "menu_block_2", 2, url_for('history')]}
+    if request.method == 'GET':
+        pass
     return render_template('index.html', title="Основная страница", option=lk_block_dict)
 
 

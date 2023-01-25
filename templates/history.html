@@ -36,11 +36,22 @@
         {% else %}
         <div class="access">
             <h1>История построения маршрутов</h1>
-            <ul class="menupoints" id="menupoints">
+
+            <div class="viewbox" id="viewbox">
+<!--                <script>document.getElementById('viewbox').style.height = "800px"</script>-->
                 {% for elem in option %}
-                <li><p class="mainmenubtn">{{ elem.routepoints.split(', ')[0] }} - {{ elem.routepoints.split(', ')[1] }}</p></li>
+                <div class="nextroute">
+                    <p class="viewboxtext">Старт: {{ elem.routepoints.split(', ')[0] }}</p>
+                    <p class="viewboxtext">Финиш: {{ elem.routepoints.split(', ')[1] }}</p>
+
+                </div>
                 {% endfor %}
-            </ul>
+            </div>
+<!--            <ul class="menupoints" id="menupoints">-->
+<!--                {% for elem in option %}-->
+<!--                <li><p class="mainmenubtn">{{ elem.routepoints.split(', ')[0] }} - {{ elem.routepoints.split(', ')[1] }}</p></li>-->
+<!--                {% endfor %}-->
+<!--            </ul>-->
         </div>
         {% endif %}
 

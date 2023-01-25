@@ -13,6 +13,8 @@
     </script>
     <script src="/static/script/script.js" type="text/javascript" defer></script>
     <script src="/static/script/provider.js" type="text/javascript" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script>$SCRIPT_ROOT = {{ request.script_root|tojson|safe }}; </script>
 </head>
 <body>
     <header id="header">
@@ -104,9 +106,6 @@
                             document.getElementById("mainimage").src = "/static/images/" + String(k % 7 + 1) + ".jpg";
                             k += 1;
                         }
-
-
-
                     </script>
 
                 </div>
@@ -119,6 +118,7 @@
     <section>
         <div class="container3"></div>
         <div class="container2">
+
             <h1>Выбрать объекты на карте</h1>
             <ul class="menupoints" id="menupoints">
                 <li id="search"><p class="mainmenubtn">Поиск</p></li>
@@ -129,6 +129,7 @@
                 <li id="routetwo"><p class="mainmenubtn">Маршрут 2: Главный вход ВДНХ - Каток ВДНХ</p></li>
                 <li id="routethree"><p class="mainmenubtn">Маршрут 3: Главный вход ВДНХ - Павильон Космос</p></li>
             </ul>
+
             <div id="map"></div>
         </div>
     </section>
