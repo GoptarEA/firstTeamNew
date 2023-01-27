@@ -53,17 +53,15 @@ def before_request():
 
 @app.route("/add_to_history")
 def add_to_history():
-    a = request.args.get('pnt1', 0, type=str)
-    b = request.args.get('pnt2', 0, type=str)
+    a = request.args.get('arrpoints', 0, type=str).rstrip(', ')
     print(a)
-    print(b)
-    r = Routes(routepoints=a + ', ' + b,
+    r = Routes(routepoints=a,
               type="history",
               userid=g.user.id)
     db.session.add(r)
     db.session.flush()
     db.session.commit()
-    return jsonify(result=a + b)
+    return jsonify(result=a)
 
 
 
@@ -73,9 +71,17 @@ def test_template():
     return render_template('test_template.html')
 
 
-@app.route("/history")
+@app.route("/history", methods=["POST", "GET"])
 def history():
     routes = [routes for routes in Routes.query.all() if g.user.id == routes.userid and routes.type == "history"]
+    routes = [rt.routepoints.split(", ") for rt in routes]
+    if request.method == "POST":
+        for elem in Routes.query.all():
+            db.session.delete(elem)
+            db.session.commit()
+        routes = [routes for routes in Routes.query.all() if g.user.id == routes.userid and routes.type == "history"]
+        routes = [rt.routepoints.split(", ") for rt in routes]
+        return render_template('history.html', title="История поиска", option=routes)
     print(routes)
     return render_template('history.html', title="История поиска", option=routes)
 

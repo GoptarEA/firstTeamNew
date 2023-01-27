@@ -518,11 +518,16 @@ s = `55.828597, 37.633898 - Павильон №1 Центральный
 
 $(function() {
   $(".menupoints").delegate("a", "click", function () {
-
-          $.getJSON($SCRIPT_ROOT + '/add_to_history', {
-              pnt1: $('input[name="pnt1"]').val(),
-              pnt2: $('input[name="pnt2"]').val()
-          });
+      var s = "";
+      for (var i = 0; i < 6; i++) {
+          if (document.getElementById('pnt' + String(i + 1)) != null) {
+              s += $(document.getElementById('pnt' + String(i + 1))).val() + ", ";
+          }
+      }
+      console.log(s);
+      $.getJSON($SCRIPT_ROOT + '/add_to_history', {
+          arrpoints: s
+      });
       });
 });
 

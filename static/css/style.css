@@ -653,6 +653,8 @@ footer {
     overflow: auto;
     width: 1124px;
     height: 400px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     background-color: #535564;
     border-radius: 16px;
     margin: auto;
@@ -670,12 +672,12 @@ footer {
 
 .nextroute {
     width: 900px;
-    height: 200px;
     background-color: #f6f6f6;
     border-radius: 16px;
     margin: auto;
     margin-top: 30px;
     padding-top: 5px;
+    padding-bottom: 10px;
     transition: 0.2s;
 }
 
@@ -959,6 +961,5 @@ html, body {
 .access {
     margin: 0px auto;
     width: 1440px;
-    height: 850px;
     background-color: #EBF0F8;
 }
