@@ -185,51 +185,6 @@ def terms():
     return render_template('terms.html')
 
 
-#
-# @app.route("/main_page/<check>&<valuelogin>")
-# def main_page(check, valuelogin):
-#     print(check)
-#     print(valuelogin)
-#     return render_template('index.html', title="Основная страница", checklogin=check, login=valuelogin)
-#
-#
-# @app.route("/db_error")
-# def db_error():
-#     return '''
-#     <h1><center>Произошла ошибка при регистрации нового пользователя.
-#     Не расстраивайтесь и попробуйте зарегистрироваться ещё раз позже.</center></h1>
-#     '''
-#
-# @app.route("/registration", methods=['post', 'get'])
-# def registration():
-#     if request.method == 'POST':
-#         res = Users.query.all()
-#         checked = True
-#         for person in res:
-#             if person.email == request.form.get('email'):
-#                 flash(message="Пользователь с таким логином уже существует", category="message")
-#                 checked = False
-# #
-#         if checked:
-#             try:
-#                 hash = generate_password_hash(request.form.get('password'))
-#                 u = Users(email=request.form.get('email'), password=hash, login=request.form.get('email'))
-#                 db.session.add(u)
-#                 db.session.flush()
-#
-#                 # p = Profiles(login=request.form.get('email'), email=request.form.get('email'),
-#                 #              id=u.id)
-#                 # db.session.add(p)
-#                 db.session.commit()
-#             except:
-#                 db.session.rollback()
-#                 return redirect(url_for("db_error"))
-#             return redirect(url_for('main_page', check=True, valuelogin=request.form.get('email')))
-#
-#         # login = request.form.get('email')
-#         # print(login)
-#     return render_template('registration.html', title="Регистрация")
-
 
 if __name__ == "__main__":
     app.run(debug=True)  # запуск веб-сервера
