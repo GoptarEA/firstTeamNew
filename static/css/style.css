@@ -961,3 +961,39 @@ html, body {
     width: 1440px;
     background-color: #EBF0F8;
 }
+
+.contextmenu_redact {
+    position: absolute;
+    background-color: #3F4192;
+    padding: 10px 10px;
+    width: 250px;
+    display: none;
+    border: 1px;
+    border-radius: 8px;
+}
+
+.contexttext {
+    margin: 0 auto 10px auto;
+    cursor: pointer;
+    color: white;
+    transition: 0.2s;
+}
+
+.contexttext:hover {
+    background: white;
+    color: black;
+    transition: 0.2s;
+}
+
+.close {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 90%;
+    color: white;
+}
+.close:hover {
+    color: red;
+}

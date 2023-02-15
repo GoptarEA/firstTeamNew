@@ -516,6 +516,24 @@ s = `55.828597, 37.633898 - Павильон №1 Центральный
     }
 }
 
+
+document.getElementById("routeone").addEventListener("contextmenu", (event) => {
+    event.preventDefault();
+    document.getElementById("contextmenu_redact").style.display = "block";
+    document.getElementById("contextmenu_redact").style.setProperty("top", String(event.pageY) + "px");
+    document.getElementById("contextmenu_redact").style.setProperty("left", String(event.pageX) + "px");
+    console.log(event.pageX);
+    console.log(event.pageY);
+})
+
+document.getElementById("close").addEventListener("click", () => {
+    document.getElementById("contextmenu_redact").style.display = "none";
+})
+
+document.getElementById("context_redact").addEventListener("click", () => {
+    document.getElementById("routeone").innerHTML = "<input id='newpoints'>";
+})
+
 $(function() {
   $(".menupoints").delegate("a", "click", function () {
       var s = "";
