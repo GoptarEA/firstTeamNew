@@ -514,25 +514,56 @@ s = `55.828597, 37.633898 - Павильон №1 Центральный
             });
         myMap.geoObjects.add(multiRoute);
     }
-}
 
-
-document.getElementById("routeone").addEventListener("contextmenu", (event) => {
+    document.getElementById("routeone").addEventListener("contextmenu", (event) => {
     event.preventDefault();
     document.getElementById("contextmenu_redact").style.display = "block";
     document.getElementById("contextmenu_redact").style.setProperty("top", String(event.pageY) + "px");
     document.getElementById("contextmenu_redact").style.setProperty("left", String(event.pageX) + "px");
     console.log(event.pageX);
     console.log(event.pageY);
-})
+    })
 
-document.getElementById("close").addEventListener("click", () => {
-    document.getElementById("contextmenu_redact").style.display = "none";
-})
+    document.getElementById("close").addEventListener("click", () => {
+        document.getElementById("contextmenu_redact").style.display = "none";
+        document.getElementById("mainmenubtn").innerHTML = "Маршрут 1: Метро ВДНХ - Главный вход ВДНХ";
+        document.getElementById("context_redact").style.display = "block";
+        document.getElementById("context_delete").style.display = "block";
+        document.getElementById("save_result").style.display = "none";
 
-document.getElementById("context_redact").addEventListener("click", () => {
-    document.getElementById("routeone").innerHTML = "<input id='newpoints'>";
-})
+    })
+
+    document.getElementById("context_redact").addEventListener("click", () => {
+        document.getElementById("mainmenubtn").innerHTML = `Маршрут 1: <input class="changepointinput" id='firstnewpoint' placeholder='старт'> -
+        <input class="changepointinput" id='secondnewpoint' placeholder='финиш'>`;
+        new ymaps.SuggestView("firstnewpoint", {provider: provider, results: 5, zIndex: 5000});
+        new ymaps.SuggestView("secondnewpoint", {provider: provider, results: 5, zIndex: 5000});
+        document.getElementById("context_redact").style.display = "none";
+        document.getElementById("context_delete").style.display = "none";
+        document.getElementById("save_result").style.display = "block";
+    })
+
+    document.getElementById("save_result").addEventListener("click", () => {
+        if (document.getElementById("firstnewpoint").value === "" && document.getElementById("secondnewpoint").value === "") {
+            alert("Вы оставили поля пустыми")
+        } else {
+            document.getElementById("contextmenu_redact").style.display = "none";
+            document.getElementById("context_redact").style.display = "block";
+            document.getElementById("context_delete").style.display = "block";
+            document.getElementById("save_result").style.display = "none";
+            document.getElementById("mainmenubtn").innerHTML = "Маршрут 1: " + document.getElementById("firstnewpoint").value + " - " + document.getElementById("secondnewpoint").value
+
+        }
+
+    })
+}
+
+
+
+
+
+
+
 
 $(function() {
   $(".menupoints").delegate("a", "click", function () {

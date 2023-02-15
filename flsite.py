@@ -44,6 +44,15 @@ class Routes(db.Model):
                f"{self.userid}\ntype: {self.type}\n{[point for point in self.routepoints.split(', ')]}"
 
 
+class Static(db.Model):
+    routeid = db.Column(db.Integer, primary_key=True)
+    startpoint = db.Column(db.String(20), nullable=False)
+    finishpoint = db.Column(db.String(20), nullable=False)
+    userid = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+
+
+
 @app.before_request
 def before_request():
     if 'user_id' in session:
@@ -89,6 +98,29 @@ def history():
 @app.route("/favorites")
 def favorites():
     return render_template('favorites.html', title='Мои маршруты')
+
+@app.route("/change_static")
+def change_static():
+    if session:
+        staticnumber = request.args.get('staticnumber', 0, type=str)
+        startpoint = request.args.get('startpoint', 0, type=str)
+        finishpoint = request.args.get('finishpoint', 0, type=str)
+        route = [route for route in Static.query.all() if route.routeid == staticnumber]
+        route.startpoint = startpoint
+        route.finishpoint = finishpoint
+        db.session.commit()
+    return jsonify(result="")
+
+@app.route("/add_static")
+def add_static():
+    if session:
+        startpoint = request.args.get('startpoint', 0, type=str)
+        finishpoint = request.args.get('finishpoint', 0, type=str)
+        s = Static(startpoint=startpoint, finishpoint=finishpoint, userid=g.user.id)
+        db.session.add(s)
+        db.session.flush()
+        db.session.commit()
+    return jsonify(result="")
 
 
 @app.route("/", methods=['GET'])

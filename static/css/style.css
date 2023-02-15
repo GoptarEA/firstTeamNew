@@ -997,3 +997,10 @@ html, body {
 .close:hover {
     color: red;
 }
+
+.changepointinput {
+    z-index: 999;
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+}
