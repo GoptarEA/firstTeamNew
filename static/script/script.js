@@ -462,16 +462,16 @@ s = `55.828597, 37.633898 - Павильон №1 Центральный
         }
     }
 
-
-    document.getElementById('routeone').onclick = function () {
+    Array.from(document.getElementsByName("statics")).forEach((element) => {
+        element.addEventListener("click", (event) => {
         if (document.getElementById("contextmenu_redact").style.display !== "block"){
-            var route = document.getElementById("mainmenubtn").innerHTML.split(": ")[1].split(" - ");
+            var route = event.target.innerHTML.split(": ")[1].split(" - ");
             console.log(route);
-            console.log(dict.get(route[0]));
+            console.log(dict.get(route[0].replace("</p>", '')));
 
             // Задаём точки мультимаршрута.
             var pointA = dict.get(route[0]),
-                pointB = dict.get(route[1]),
+                pointB = dict.get(route[1].replace("</p>", '')),
                 multiRoute = new ymaps.multiRouter.MultiRoute({
                     referencePoints: [
                         pointA,
@@ -485,54 +485,69 @@ s = `55.828597, 37.633898 - Павильон №1 Центральный
                 });
             myMap.geoObjects.add(multiRoute);
         }
-    }
-    document.getElementById('routetwo').onclick = function () {
-        // Задаём точки мультимаршрута.
-        var pointA = [55.826271, 37.637578],
-            pointB = [55.830473, 37.630806],
-            multiRoute = new ymaps.multiRouter.MultiRoute({
-                referencePoints: [
-                    pointA,
-                    pointB
-                ],
-                params: {
-                    routingMode: 'pedestrian'
-                }
-            }, {
-                boundsAutoApply: true
-            });
-        myMap.geoObjects.add(multiRoute);
-    }
-    document.getElementById('routethree').onclick = function () {
-        // Задаём точки мультимаршрута.
-        var pointA = [55.826271, 37.637578],
-            pointB = [55.835044, 37.621723],
-            multiRoute = new ymaps.multiRouter.MultiRoute({
-                referencePoints: [
-                    pointA,
-                    pointB
-                ],
-                params: {
-                    routingMode: 'pedestrian'
-                }
-            }, {
-                boundsAutoApply: true
-            });
-        myMap.geoObjects.add(multiRoute);
-    }
+    });
+    });
 
-    document.getElementById("routeone").addEventListener("contextmenu", (event) => {
-    event.preventDefault();
-    document.getElementById("contextmenu_redact").style.display = "block";
-    document.getElementById("contextmenu_redact").style.setProperty("top", String(event.pageY) + "px");
-    document.getElementById("contextmenu_redact").style.setProperty("left", String(event.pageX) + "px");
-    console.log(event.pageX);
-    console.log(event.pageY);
-    })
+
+    // document.getElementById('routetwo').onclick = function () {
+    //     // Задаём точки мультимаршрута.
+    //     var pointA = [55.826271, 37.637578],
+    //         pointB = [55.830473, 37.630806],
+    //         multiRoute = new ymaps.multiRouter.MultiRoute({
+    //             referencePoints: [
+    //                 pointA,
+    //                 pointB
+    //             ],
+    //             params: {
+    //                 routingMode: 'pedestrian'
+    //             }
+    //         }, {
+    //             boundsAutoApply: true
+    //         });
+    //     myMap.geoObjects.add(multiRoute);
+    // }
+    // document.getElementById('routethree').onclick = function () {
+    //     // Задаём точки мультимаршрута.
+    //     var pointA = [55.826271, 37.637578],
+    //         pointB = [55.835044, 37.621723],
+    //         multiRoute = new ymaps.multiRouter.MultiRoute({
+    //             referencePoints: [
+    //                 pointA,
+    //                 pointB
+    //             ],
+    //             params: {
+    //                 routingMode: 'pedestrian'
+    //             }
+    //         }, {
+    //             boundsAutoApply: true
+    //         });
+    //     myMap.geoObjects.add(multiRoute);
+    // }
+
+
+    document.getElementById("container2").addEventListener("contextmenu", (event) => {
+        if (event.target.id === "routeone" || event.target.id === "mainmenubtn") {
+            event.preventDefault();
+
+            if (event.target.id === "routeone") {
+                window.clickedli = event.target.childNodes[0];
+            } else {
+                window.clickedli = event.target.parentElement
+            }
+            window.eleminput = window.clickedli.childNodes[0].innerHTML;
+            console.log(window.clickedli)
+            document.getElementById("contextmenu_redact").style.display = "block";
+            document.getElementById("contextmenu_redact").style.setProperty("top", String(event.pageY) + "px");
+            document.getElementById("contextmenu_redact").style.setProperty("left", String(event.pageX) + "px");
+            console.log(event.pageX);
+            console.log(event.pageY);
+        }
+    });
+
 
     document.getElementById("close").addEventListener("click", () => {
         document.getElementById("contextmenu_redact").style.display = "none";
-        document.getElementById("mainmenubtn").innerHTML = "Маршрут 1: Метро ВДНХ - Главный вход ВДНХ";
+        window.clickedli.childNodes[0].innerHTML = window.eleminput;
         document.getElementById("context_redact").style.display = "block";
         document.getElementById("context_delete").style.display = "block";
         document.getElementById("save_result").style.display = "none";
@@ -540,7 +555,8 @@ s = `55.828597, 37.633898 - Павильон №1 Центральный
     })
 
     document.getElementById("context_redact").addEventListener("click", () => {
-        document.getElementById("mainmenubtn").innerHTML = `Маршрут 1: <input class="changepointinput" id='firstnewpoint' placeholder='старт'> -
+        window.eleminput = window.clickedli.childNodes[0].innerHTML;
+        window.clickedli.childNodes[0].innerHTML = 'Маршрут ' + String(window.eleminput.split(" ")[1][0]) + `: <input class="changepointinput" id='firstnewpoint' placeholder='старт'> -
         <input class="changepointinput" id='secondnewpoint' placeholder='финиш'>`;
         new ymaps.SuggestView("firstnewpoint", {provider: provider, results: 5, zIndex: 5000});
         new ymaps.SuggestView("secondnewpoint", {provider: provider, results: 5, zIndex: 5000});
@@ -557,11 +573,14 @@ s = `55.828597, 37.633898 - Павильон №1 Центральный
             document.getElementById("context_redact").style.display = "block";
             document.getElementById("context_delete").style.display = "block";
             document.getElementById("save_result").style.display = "none";
-            document.getElementById("mainmenubtn").innerHTML = "Маршрут 1: " + document.getElementById("firstnewpoint").value + " - " + document.getElementById("secondnewpoint").value
+            window.clickedli.childNodes[0].innerHTML = "Маршрут " + String(window.eleminput.split(" ")[1][0]) + ": " + document.getElementById("firstnewpoint").value + " - " + document.getElementById("secondnewpoint").value
 
         }
-
-    })
+    });
+    document.getElementById("context_add").addEventListener("click", () => {
+        var kolvo = Array.from(document.getElementsByName("statics")).length;
+        document.getElementById("menupoints").innerHTML += '<li id="routeone" name="statics"><p id="mainmenubtn" class="mainmenubtn">Маршрут ' + String(kolvo + 1) + ': Старт - Финиш</p></li>';
+    });
 }
 
 
@@ -587,10 +606,23 @@ $(function() {
   $("#save_result").bind("click", function () {
         var start = $(document.getElementById("firstnewpoint")).val();
         var finish = $(document.getElementById("secondnewpoint")).val();
-        console.log(start, finish);
+        var routenumber = window.eleminput.split(" ")[1][0]
+        console.log(start, finish, routenumber);
         $.getJSON($SCRIPT_ROOT + '/change_static', {
             start: start,
-            finish: finish
+            finish: finish,
+            routenumber: routenumber
+            });
+    });
+  $("#context_add").bind("click", function () {
+        var start = $(document.getElementById("firstnewpoint")).val();
+        var finish = $(document.getElementById("secondnewpoint")).val();
+        var routenumber = window.eleminput.split(" ")[1][0]
+        console.log(start, finish, routenumber);
+        $.getJSON($SCRIPT_ROOT + '/add_static', {
+            start: start,
+            finish: finish,
+            routenumber: routenumber
             });
     });
 });

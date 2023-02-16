@@ -104,7 +104,8 @@ def change_static():
     if session:
         startpoint = request.args.get('start', 0, type=str)
         finishpoint = request.args.get('finish', 0, type=str)
-        route = [route for route in Static.query.all() if route.routeid == 1 and route.userid == g.user.id][0]
+        routenumber = request.args.get('routenumber', 0, type=str)
+        route = [route for route in Static.query.all() if route.routeid == int(routenumber) and route.userid == g.user.id][0]
         route.startpoint = startpoint
         route.finishpoint = finishpoint
         db.session.commit()
@@ -113,8 +114,8 @@ def change_static():
 @app.route("/add_static")
 def add_static():
     if session:
-        startpoint = request.args.get('startpoint', 0, type=str)
-        finishpoint = request.args.get('finishpoint', 0, type=str)
+        startpoint = request.args.get('start', 0, type=str)
+        finishpoint = request.args.get('finish', 0, type=str)
         s = Static(startpoint=startpoint, finishpoint=finishpoint, userid=g.user.id)
         db.session.add(s)
         db.session.flush()
@@ -131,7 +132,7 @@ def index():
     if request.method == 'GET':
         pass
     if session:
-        staticroutes = [[route.startpoint, route.finishpoint] for route in Static.query.all() if route.userid == g.user.id]
+        staticroutes = [[route.startpoint, route.finishpoint, route.routeid] for route in Static.query.all() if route.userid == g.user.id]
     print(staticroutes)
     return render_template('index.html', title="Основная страница", option=lk_block_dict, staticroutes=staticroutes)
 

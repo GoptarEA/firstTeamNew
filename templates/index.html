@@ -118,7 +118,7 @@
     </header>
     <section>
         <div class="container3"></div>
-        <div class="container2">
+        <div class="container2" id="container2">
 
             <h1>Выбрать объекты на карте</h1>
             <ul class="menupoints" id="menupoints">
@@ -127,9 +127,9 @@
                 <li id="timeRoute"><p class="mainmenubtn">Маршрут с ограничением времени</p></li>
                 <li id="placesofinterest"><p class="mainmenubtn">Достопримечательности на карте ВДНХ</p></li>
                 {% if g.user %}
-                    <li id="routeone"><p id="mainmenubtn" class="mainmenubtn">Маршрут 1: {{staticroutes[0][0]}} - {{staticroutes[0][1]}}</p></li>
-                    <li id="routetwo"><p id="mainmenubtn2" class="mainmenubtn">Маршрут 2: {{staticroutes[1][0]}} - {{staticroutes[1][1]}}</p></li>
-                    <li id="routethree"><p id="mainmenubtn3" class="mainmenubtn">Маршрут 3: {{staticroutes[2][0]}} - {{staticroutes[2][1]}}</p></li>
+                    {% for elem in staticroutes %}
+                        <li id="routeone" name="statics"><p id="mainmenubtn" class="mainmenubtn">Маршрут {{ elem[2] }}: {{elem[0]}} - {{elem[1]}}</p></li>
+                    {% endfor %}
                 {% else %}
                     <li id="routeone"><p id="mainmenubtn" class="mainmenubtn">Маршрут 1: Метро ВДНХ - Главный вход ВДНХ</p></li>
                     <li id="routetwo"><p id="mainmenubtn2" class="mainmenubtn">Маршрут 2: Главный вход ВДНХ - Каток ВДНХ</p></li>
@@ -159,6 +159,7 @@
 </body>
  <div id="contextmenu_redact" class="contextmenu_redact">
      <p id="context_redact" class="contexttext">Редактировать</p>
+     <p id="context_add" class="contexttext">Добавить</p>
      <p id="context_delete" class="contexttext">Удалить</p>
      <p id="save_result" class="contexttext" style="display: none;">Сохранить</p>
      <p id="close" class="close">X</p>
