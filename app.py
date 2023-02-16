@@ -102,10 +102,9 @@ def favorites():
 @app.route("/change_static")
 def change_static():
     if session:
-        staticnumber = request.args.get('staticnumber', 0, type=str)
-        startpoint = request.args.get('startpoint', 0, type=str)
-        finishpoint = request.args.get('finishpoint', 0, type=str)
-        route = [route for route in Static.query.all() if route.routeid == staticnumber]
+        startpoint = request.args.get('start', 0, type=str)
+        finishpoint = request.args.get('finish', 0, type=str)
+        route = [route for route in Static.query.all() if route.routeid == 1 and route.userid == g.user.id][0]
         route.startpoint = startpoint
         route.finishpoint = finishpoint
         db.session.commit()
@@ -126,11 +125,15 @@ def add_static():
 @app.route("/", methods=['GET'])
 @app.route("/index", methods=['GET'])
 def index():
+    staticroutes = []
     lk_block_dict = {'lk_block_1': ["Мои маршруты", "Перейти", 2, "menu_block_1", 1, url_for('favorites')],
                      'lk_block_2': ["История поиска", "Открыть", 1, "menu_block_2", 2, url_for('history')]}
     if request.method == 'GET':
         pass
-    return render_template('index.html', title="Основная страница", option=lk_block_dict)
+    if session:
+        staticroutes = [[route.startpoint, route.finishpoint] for route in Static.query.all() if route.userid == g.user.id]
+    print(staticroutes)
+    return render_template('index.html', title="Основная страница", option=lk_block_dict, staticroutes=staticroutes)
 
 
 @app.route('/login', methods=['GET', 'POST'])

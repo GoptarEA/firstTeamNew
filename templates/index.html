@@ -126,9 +126,15 @@
                 <li id="newRoute"><p class="mainmenubtn">Построить маршрут</p></li>
                 <li id="timeRoute"><p class="mainmenubtn">Маршрут с ограничением времени</p></li>
                 <li id="placesofinterest"><p class="mainmenubtn">Достопримечательности на карте ВДНХ</p></li>
-                <li id="routeone"><p id="mainmenubtn" class="mainmenubtn">Маршрут 1: Метро ВДНХ - Главный вход ВДНХ</p></li>
-                <li id="routetwo"><p class="mainmenubtn">Маршрут 2: Главный вход ВДНХ - Каток ВДНХ</p></li>
-                <li id="routethree"><p class="mainmenubtn">Маршрут 3: Главный вход ВДНХ - Павильон Космос</p></li>
+                {% if g.user %}
+                    <li id="routeone"><p id="mainmenubtn" class="mainmenubtn">Маршрут 1: {{staticroutes[0][0]}} - {{staticroutes[0][1]}}</p></li>
+                    <li id="routetwo"><p id="mainmenubtn2" class="mainmenubtn">Маршрут 2: {{staticroutes[1][0]}} - {{staticroutes[1][1]}}</p></li>
+                    <li id="routethree"><p id="mainmenubtn3" class="mainmenubtn">Маршрут 3: {{staticroutes[2][0]}} - {{staticroutes[2][1]}}</p></li>
+                {% else %}
+                    <li id="routeone"><p id="mainmenubtn" class="mainmenubtn">Маршрут 1: Метро ВДНХ - Главный вход ВДНХ</p></li>
+                    <li id="routetwo"><p id="mainmenubtn2" class="mainmenubtn">Маршрут 2: Главный вход ВДНХ - Каток ВДНХ</p></li>
+                    <li id="routethree"><p id="mainmenubtn3" class="mainmenubtn">Маршрут 3: Главный вход ВДНХ - Павильон Космос</p></li>
+                {% endif %}
             </ul>
 
             <div id="map"></div>

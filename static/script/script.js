@@ -464,21 +464,27 @@ s = `55.828597, 37.633898 - Павильон №1 Центральный
 
 
     document.getElementById('routeone').onclick = function () {
-        // Задаём точки мультимаршрута.
-        var pointA = [55.824231, 37.638901],
-            pointB = [55.826271, 37.637578],
-            multiRoute = new ymaps.multiRouter.MultiRoute({
-                referencePoints: [
-                    pointA,
-                    pointB
-                ],
-                params: {
-                    routingMode: 'pedestrian'
-                }
-            }, {
-                boundsAutoApply: true
-            });
-        myMap.geoObjects.add(multiRoute);
+        if (document.getElementById("contextmenu_redact").style.display !== "block"){
+            var route = document.getElementById("mainmenubtn").innerHTML.split(": ")[1].split(" - ");
+            console.log(route);
+            console.log(dict.get(route[0]));
+
+            // Задаём точки мультимаршрута.
+            var pointA = dict.get(route[0]),
+                pointB = dict.get(route[1]),
+                multiRoute = new ymaps.multiRouter.MultiRoute({
+                    referencePoints: [
+                        pointA,
+                        pointB
+                    ],
+                    params: {
+                        routingMode: 'pedestrian'
+                    }
+                }, {
+                    boundsAutoApply: true
+                });
+            myMap.geoObjects.add(multiRoute);
+        }
     }
     document.getElementById('routetwo').onclick = function () {
         // Задаём точки мультимаршрута.
@@ -578,6 +584,15 @@ $(function() {
           arrpoints: s
       });
       });
+  $("#save_result").bind("click", function () {
+        var start = $(document.getElementById("firstnewpoint")).val();
+        var finish = $(document.getElementById("secondnewpoint")).val();
+        console.log(start, finish);
+        $.getJSON($SCRIPT_ROOT + '/change_static', {
+            start: start,
+            finish: finish
+            });
+    });
 });
 
 
