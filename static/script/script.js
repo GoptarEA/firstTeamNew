@@ -489,42 +489,6 @@ s = `55.828597, 37.633898 - Павильон №1 Центральный
     });
 
 
-    // document.getElementById('routetwo').onclick = function () {
-    //     // Задаём точки мультимаршрута.
-    //     var pointA = [55.826271, 37.637578],
-    //         pointB = [55.830473, 37.630806],
-    //         multiRoute = new ymaps.multiRouter.MultiRoute({
-    //             referencePoints: [
-    //                 pointA,
-    //                 pointB
-    //             ],
-    //             params: {
-    //                 routingMode: 'pedestrian'
-    //             }
-    //         }, {
-    //             boundsAutoApply: true
-    //         });
-    //     myMap.geoObjects.add(multiRoute);
-    // }
-    // document.getElementById('routethree').onclick = function () {
-    //     // Задаём точки мультимаршрута.
-    //     var pointA = [55.826271, 37.637578],
-    //         pointB = [55.835044, 37.621723],
-    //         multiRoute = new ymaps.multiRouter.MultiRoute({
-    //             referencePoints: [
-    //                 pointA,
-    //                 pointB
-    //             ],
-    //             params: {
-    //                 routingMode: 'pedestrian'
-    //             }
-    //         }, {
-    //             boundsAutoApply: true
-    //         });
-    //     myMap.geoObjects.add(multiRoute);
-    // }
-
-
     document.getElementById("container2").addEventListener("contextmenu", (event) => {
         if (event.target.id === "routeone" || event.target.id === "mainmenubtn") {
             event.preventDefault();

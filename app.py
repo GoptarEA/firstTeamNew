@@ -223,4 +223,4 @@ def terms():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)  # запуск веб-сервера
+    app.run(debug=True)
